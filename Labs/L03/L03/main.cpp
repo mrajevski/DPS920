@@ -161,8 +161,7 @@ int main(int argc, char** agrv) {
 		
 		if (c.at(0) == 'N' || c.at(0) == 'n') {
 			sprintf_s(img, "Lab03.jpg");
-			cv::imwrite(img, m);
-			std::cout << "Image saved as Lab03.jpg!" << endl;
+			std::cout << (cv::imwrite(img, m) ? "Image saved as Lab03.jpg!" : "Image save error.") << endl;
 			break;
 		}
 	}
