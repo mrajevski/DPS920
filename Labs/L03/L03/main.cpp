@@ -10,7 +10,7 @@ int main(int argc, char** agrv) {
 
 	cv::Mat m(480, 640, CV_8UC3, cv::Vec3b(0, 0, 0));
 	cv::Size size = m.size();
-	cout << "Window Size: " << size.width << " x " << size.height << endl << endl;
+	std::cout << "Window Size: " << size.width << " x " << size.height << endl << endl;
 
 	int x = 0, y = 0, rectangleCount = 0;
 	string color = "";
@@ -26,18 +26,18 @@ int main(int argc, char** agrv) {
 
 		cv::waitKey(33);
 
-		cout << "Rectangle #" << (rectangleCount + 1) << endl
+		std::cout << "Rectangle #" << (rectangleCount + 1) << endl
 			<< "----------------------" << endl;
 
-		cout << "Top-Left coordinate (x, y): ";
+		std::cout << "Top-Left coordinate (x, y): ";
 		for (bool i = false; !i;) {
-			cin >> x >> y;
+			std::cin >> x >> y;
 			if ((x < size.width && x >= 0) && (y < size.height && y >= 0)) {
 				p1.x = x;
 				p1.y = y;
 				i = true;
 			} else {
-				cout << "Coordinates not within valid parameters (" << size.width << ", " << size.height << ")" << endl
+				std::cout << "Coordinates not within valid parameters (" << size.width << ", " << size.height << ")" << endl
 					<< "Try Again:";
 			}
 			x = 0;
@@ -45,16 +45,16 @@ int main(int argc, char** agrv) {
 		}
 
 		// It is assumed that the second set of coords are actually the lower right //
-		cout << "Bottom-Right coordinate (x, y): ";
+		std::cout << "Bottom-Right coordinate (x, y): ";
 		for (bool i = false; !i;) {
-			cin >> x >> y;
+			std::cin >> x >> y;
 			if ((x <= size.width && x >= 1) && (y <= size.height && y >= 1)) {
 				p2.x = x;
 				p2.y = y;
 				i = true;
 			}
 			else {
-				cout << "Coordinates not within valid parameters (" << size.width << ", " << size.height << ")" << endl
+				std::cout << "Coordinates not within valid parameters (" << size.width << ", " << size.height << ")" << endl
 					<< "Try Again:";
 			}
 			x = 0;
@@ -65,58 +65,67 @@ int main(int argc, char** agrv) {
 		rectangleCount++;
 
 		// Color input is stored as acsii code //
-		cout << "Rectangle color (Black - k, White - w, Red - r, Green - g, Blue - b" << endl
+		std::cout << "Rectangle color (Black - k, White - w, Red - r, Green - g, Blue - b" << endl
 			<< "Cyan - c, Magenta - m, Yellow - y, Random - x): ";
 		for (bool i = false; !i;) {
-			cin >> color;
-			switch ((int)(color.at(0))) {
-			case 107: // Black
+			std::cin >> color;
+			switch (color.at(0)) {
+			case 'k': // Black
+			case 'K':
 				rgb = cv::Vec3b(0, 0, 0);
 				i = true;
-				cout << endl;
+				std::cout << endl;
 				break;
-			case 119: // White
+			case 'w': // White
+			case 'W':
 				rgb = cv::Vec3b(255, 255, 255);
 				i = true;
-				cout << endl;
+				std::cout << endl;
 				break;
-			case 114: // Red
+			case 'r': // Red
+			case 'R': 
 				rgb = cv::Vec3b(0, 0, 255);
 				i = true;
-				cout << endl;
+				std::cout << endl;
 				break;
-			case 103: // Green
+			case 'g': // Green
+			case 'G':
 				rgb = cv::Vec3b(0, 255, 0);
 				i = true;
-				cout << endl;
+				std::cout << endl;
 				break;
-			case 98:  // Blue
+			case 'b':  // Blue
+			case 'B':
 				rgb = cv::Vec3b(255, 0, 0);
 				i = true;
-				cout << endl;
+				std::cout << endl;
 				break;
-			case 99:  // Cyan
+			case 'c':  // Cyan
+			case 'C':
 				rgb = cv::Vec3b(255, 255, 0);
 				i = true;
-				cout << endl;
+				std::cout << endl;
 				break;
-			case 109: // Magenta
+			case 'm': // Magenta
+			case 'M':
 				rgb = cv::Vec3b(255, 0, 255);
 				i = true;
-				cout << endl;
+				std::cout << endl;
 				break;
-			case 121: // Yellow
+			case 'y': // Yellow
+			case 'Y':
 				rgb = cv::Vec3b(0, 255, 255);
 				i = true;
-				cout << endl;
+				std::cout << endl;
 				break;
-			case 120: // Random
+			case 'x': // Random
+			case 'X': // Black
 				rgb = cv::Vec3b((rand()*10000) % 256, (rand() * 10000) % 256, (rand() * 10000) % 256);
 				i = true;
-				cout << endl;
+				std::cout << endl;
 				break;
 			default:
-				cout << "Color specified isn't supported, please use on of the colors listed above." << endl
+				std::cout << "Color specified isn't supported, please use on of the colors listed above." << endl
 					<< "Try Again: ";
 				break;
 			}
@@ -133,37 +142,32 @@ int main(int argc, char** agrv) {
 
 		cv::imshow("Lab 03", m);
 
-		cout << "Area: " << rectangle.area() << endl
+		std::cout << "Area: " << rectangle.area() << endl
 			<< "Width: " << rectangle.width << endl
 			<< "Height: " << rectangle.height << endl << endl;
 
-		cout << "Enter Coordinates of a Point: ";
-		cin >> x >> y;
+		std::cout << "Enter Coordinates of a Point: ";
+		std::cin >> x >> y;
 
-		cout << "The point (" << x << ", " << y << ")"
+		std::cout << "The point (" << x << ", " << y << ")"
 			<< (rectangle.contains(cv::Point2i(x, y)) ? " is " : " is not ")
 			<< "inside the rectangle" << endl;
 			
 		string c = "";
-		cout << "Continue? (Y/N): ";
-		cin >> c;
+		std::cout << "Continue? (Y/N): ";
+		std::cin >> c;
+		std::cout << endl;
 		
 		if (c.at(0) == 'N' || c.at(0) == 'n') {
-
 			sprintf_s(img, "Lab03.jpg", "");
 			cv::imwrite(img, m);
+			std::cout << "Image saved as Lab03.jpg!" << endl;
 			break;
 		}
-
 	}
 
-
+	std::cout << "Press any key to exit.";
+	std::cin >> x;
 	return 0;
-
-
-
-
-
-
 
 }
