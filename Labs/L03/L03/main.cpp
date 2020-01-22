@@ -119,7 +119,7 @@ int main(int argc, char** agrv) {
 				std::cout << endl;
 				break;
 			case 'x': // Random
-			case 'X': // Black
+			case 'X':
 				rgb = cv::Vec3b((rand()*10000) % 256, (rand() * 10000) % 256, (rand() * 10000) % 256);
 				i = true;
 				std::cout << endl;
@@ -159,7 +159,7 @@ int main(int argc, char** agrv) {
 		std::cout << endl;
 		
 		if (c.at(0) == 'N' || c.at(0) == 'n') {
-			sprintf_s(img, "Lab03.jpg", "");
+			sprintf_s(img, "Lab03.jpg");
 			cv::imwrite(img, m);
 			std::cout << "Image saved as Lab03.jpg!" << endl;
 			break;
