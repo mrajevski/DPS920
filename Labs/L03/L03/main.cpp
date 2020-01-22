@@ -141,6 +141,7 @@ int main(int argc, char** agrv) {
 		}
 
 		cv::imshow("Lab 03", m);
+		cv::waitKey(10);
 
 		std::cout << "Area: " << rectangle.area() << endl
 			<< "Width: " << rectangle.width << endl
